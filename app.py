@@ -31,7 +31,6 @@ st.divider()
 # Load the saved model
 model = joblib.load("liver_patient_model.pkl")
 
-
 # Patient input form
 st.subheader("📋 Patient Details")
 
@@ -84,24 +83,24 @@ patient_data = pd.DataFrame([{
 }])
 
 # Predict button
-if st.button("🔍 Predict Result", type="primary", use_container_width=True):
+if st.button(
+    "🔍 Predict Result",
+    type="primary",
+    use_container_width=True
+):
     prediction = model.predict(patient_data)[0]
 
     # Display prediction result
     st.subheader("📊 Prediction Result")
-
-    if prediction == 1:
-        st.info("Model output: Class 1")
-    else:
-        st.info("Model output: Class 2")
+    st.info(f"Model output: Class {prediction}")
 
     st.caption(
         "This is a machine learning classification, "
         "not a medical diagnosis."
     )
+
 # Footer
 st.divider()
-
 st.caption(
     "Built with Python, Scikit-learn, and Streamlit | "
     "AI/ML Portfolio Project"
